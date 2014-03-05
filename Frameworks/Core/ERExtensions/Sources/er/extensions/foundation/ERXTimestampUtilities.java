@@ -460,9 +460,14 @@ public class ERXTimestampUtilities {
         return new NSTimestamp(yearOfCommonEra(value), monthOfYear(value), -dayOfWeek(value) + 1, 0, 0, 0, NSTimeZone.defaultTimeZone());
     }
 
-    public static NSTimestamp firstDateInSameMonth(NSTimestamp value) {
-        return new NSTimestamp(yearOfCommonEra(value), monthOfYear(value), -dayOfMonth(value) + 1, 0, 0, 0, NSTimeZone.defaultTimeZone());
-    }
+	/**
+	* @param value
+	* @return NSTimestamp representing midnight (00:00:00 in the default timezone) of the first day of the month
+	*/
+	public static NSTimestamp firstDateInSameMonth(NSTimestamp value) {
+		return new NSTimestamp(yearOfCommonEra(value), monthOfYear(value)+1, 1, 0, 0, 0, NSTimeZone.defaultTimeZone());
+	}
+
 
     public static NSTimestamp firstDateInNextMonth(NSTimestamp value) {
         return firstDateInSameMonth(value).timestampByAddingGregorianUnits(0, 1, 0, 0, 0, 0);
